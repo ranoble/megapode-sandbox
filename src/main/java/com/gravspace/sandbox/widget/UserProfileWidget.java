@@ -24,6 +24,7 @@ import com.gravspace.util.Layers;
 public class UserProfileWidget extends ComponentBase implements IComponent   {
 	
 	User user;
+	private Integer userId;
 	
 	public UserProfileWidget(Map<Layers, ActorRef> routers,
 			ActorRef coordinatingActor, UntypedActorContext actorContext) {
@@ -33,23 +34,20 @@ public class UserProfileWidget extends ComponentBase implements IComponent   {
 
 	@Override
 	public void initialise(Object... args) {
-		Integer userId = (Integer)args[0];
+		userId = (Integer)args[0];
+		
+	}
+
+	@Override
+	public void collect() {
 		IUserProfileData profile = DataAccessors.get(IUserProfileData.class, UserProfileData.class, this);
 		Promise<Object> wait = prepareSet();
 		set("user", profile.getUser(userId), wait);
 	}
 
 	@Override
-	public void collect() {
-		
-		
-	}
-
-	@Override
 	public void process() {
 		getLogger().info(user.toString());
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -58,6 +56,14 @@ public class UserProfileWidget extends ComponentBase implements IComponent   {
 		Map<String, Object> context = new HashMap<String, Object>();
 		context.put("user", user);
 		return renderer.render("templates.widgets.profile.vm", context);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

@@ -52,7 +52,7 @@ public class UserProfileData extends PersistanceBase implements
 	@Override
 	public Future<List<Comment>> comments(Integer id){
 		QueryRunner run = new QueryRunner();
-		ResultSetHandler<List<Comment>> handler = new BeanHandler(Comment.class);
+		ResultSetHandler<List<Comment>> handler = new BeanListHandler(Comment.class);
 		try {
 			List<Comment> results = run.query(this.connection, 
 					"SELECT comment.* FROM connection " +

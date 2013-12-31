@@ -51,19 +51,19 @@ public class HomePage extends PageBase implements IPage {
 		Promise<Object> wait = prepareSet();
 		set("profileWidget", profileWidget.build(userId, 1), wait);
 		
-//		IWidget commentsWidget = Widgets.get(UserCommentsWidget.class, this);
-//		set("commentsWidget", commentsWidget.build(userId));
+		IWidget commentsWidget = Widgets.get(UserCommentsWidget.class, this);
+		wait = prepareSet();
+		set("commentsWidget", commentsWidget.build(userId), wait);
 	}
 
 	@Override
 	public Future<String> render() throws Exception {
 		
-//		IRenderer renderer = Renderers.getDefault(this);
-//		Map<String, Object> context = new HashMap<String, Object>();
-//		context.put("profile", profileWidget);
-//		context.put("comments", "comments");
-//		return renderer.render("templates.home.vm", context);
-		return Futures.successful("adssadas");
+		IRenderer renderer = Renderers.getDefault(this);
+		Map<String, Object> context = new HashMap<String, Object>();
+		context.put("profile", profileWidget);
+		context.put("comments", commentsWidget);
+		return renderer.render("templates.home.vm", context);
 	}
 
 	public String getProfileWidget() {

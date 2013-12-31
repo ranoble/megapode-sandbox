@@ -28,7 +28,6 @@ public class UserCommentsWidget extends ComponentBase implements IComponent   {
 
 	List<Comment> comments;
 	List<String> commentWidgets;
-	String rendered;
 	
 	public UserCommentsWidget(Map<Layers, ActorRef> routers,
 			ActorRef coordinatingActor, UntypedActorContext actorContext) {
@@ -48,7 +47,7 @@ public class UserCommentsWidget extends ComponentBase implements IComponent   {
 		IWidget commentWidget = Widgets.get(CommentWidget.class, this);
 		for (Comment comment: comments){
 			Promise<Object> wait = prepareSet();
-			add("comments", commentWidget.build(comment), wait);
+			add("commentWidgets", commentWidget.build(comment), wait);
 		}
 		
 	}
@@ -82,12 +81,5 @@ public class UserCommentsWidget extends ComponentBase implements IComponent   {
 		this.commentWidgets = commentWidgets;
 	}
 
-	public String getRendered() {
-		return rendered;
-	}
-
-	public void setRendered(String rendered) {
-		this.rendered = rendered;
-	}
 
 }
