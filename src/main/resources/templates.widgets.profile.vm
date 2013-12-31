@@ -1,0 +1,7 @@
+<div>
+    <img src="$profileImage" />
+    <ul>
+    <li>$firstname $lastname</li>
+    <li><a href="mailto: $email">email</a></li>
+    </ul>
+</div>

@@ -1,0 +1,7 @@
+<ul>
+#foreach( $comment in $comments )
+<li>
+    $comment
+</li>
+#end
+</ul>
