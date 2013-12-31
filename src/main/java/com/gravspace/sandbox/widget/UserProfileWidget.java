@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import scala.concurrent.Future;
+import scala.concurrent.Promise;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
@@ -34,17 +35,19 @@ public class UserProfileWidget extends ComponentBase implements IComponent   {
 	public void initialise(Object... args) {
 		Integer userId = (Integer)args[0];
 		IUserProfileData profile = DataAccessors.get(IUserProfileData.class, UserProfileData.class, this);
-		set("user", profile.getUser(userId));
+		Promise<Object> wait = prepareSet();
+		set("user", profile.getUser(userId), wait);
 	}
 
 	@Override
 	public void collect() {
-		getLogger().info("Collect");
+		
 		
 	}
 
 	@Override
 	public void process() {
+		getLogger().info(user.toString());
 		// TODO Auto-generated method stub
 		
 	}

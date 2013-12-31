@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import scala.concurrent.Future;
+import scala.concurrent.Promise;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
@@ -39,14 +40,16 @@ public class HomePage extends PageBase implements IPage {
 	@Override
 	public void collect() {
 		ISessionManager sessions = Calculations.get(ISessionManager.class, SessionManager.class, this);
-		set("userId", sessions.currentUser());
+		Promise<Object> wait = prepareSet();
+		set("userId", sessions.currentUser(), wait);
 	}
 
 	@Override
 	public void process() {
-		//IWidget profileWidget = Widgets.get(UserProfileWidget.class, this);
+		IWidget profileWidget = Widgets.get(UserProfileWidget.class, this);
 		getLogger().info("User Id = >"+userId);
-		//set("profileWidget", profileWidget.build(userId));
+		Promise<Object> wait = prepareSet();
+		set("profileWidget", profileWidget.build(userId, 1), wait);
 		
 //		IWidget commentsWidget = Widgets.get(UserCommentsWidget.class, this);
 //		set("commentsWidget", commentsWidget.build(userId));

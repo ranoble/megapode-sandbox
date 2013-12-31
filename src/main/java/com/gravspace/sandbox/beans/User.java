@@ -1,5 +1,9 @@
 package com.gravspace.sandbox.beans;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.apache.commons.beanutils.BeanUtils;
+
 public class User {
 	Integer id;
 	String firstname;
@@ -36,5 +40,21 @@ public class User {
 	}
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
+	}
+	
+	public String toString(){
+		try {
+			return BeanUtils.describe(this).toString();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return email;
 	}
 }

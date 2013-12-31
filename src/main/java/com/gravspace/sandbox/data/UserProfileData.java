@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import scala.concurrent.Future;
 
@@ -38,7 +39,7 @@ public class UserProfileData extends PersistanceBase implements
 	@Override
 	public Future<User> getUser(Integer id){
 		QueryRunner run = new QueryRunner();
-		ResultSetHandler<List<User>> handler = new BeanHandler(User.class);
+		ResultSetHandler<List<User>> handler = new BeanListHandler(User.class);
 		try {
 			List<User> results = run.query(this.connection, 
 					"select * from profile where id = "+id, handler);

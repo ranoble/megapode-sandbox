@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import scala.concurrent.Future;
+import scala.concurrent.Promise;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
@@ -38,14 +39,16 @@ public class UserCommentsWidget extends ComponentBase implements IComponent   {
 	public void initialise(Object... args) {
 		Integer userId = (Integer)args[0];
 		IUserProfileData profile = DataAccessors.get(IUserProfileData.class, UserProfileData.class, this);
-		set("comments", profile.comments(userId));
+		Promise<Object> wait = prepareSet();
+		set("comments", profile.comments(userId), wait);
 	}
 
 	@Override
 	public void collect() {
 		IWidget commentWidget = Widgets.get(CommentWidget.class, this);
 		for (Comment comment: comments){
-			add("comments", commentWidget.build(comment));
+			Promise<Object> wait = prepareSet();
+			add("comments", commentWidget.build(comment), wait);
 		}
 		
 	}
