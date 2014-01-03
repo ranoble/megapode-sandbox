@@ -1,5 +1,6 @@
 package com.gravspace.sandbox.widget;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ import com.gravspace.util.Layers;
 public class UserCommentsWidget extends ComponentBase implements IComponent   {
 
 	List<Comment> comments;
-	List<String> commentWidgets;
+	List<String> commentWidgets = new ArrayList<String>();
 	
 	public UserCommentsWidget(Map<Layers, ActorRef> routers,
 			ActorRef coordinatingActor, UntypedActorContext actorContext) {
