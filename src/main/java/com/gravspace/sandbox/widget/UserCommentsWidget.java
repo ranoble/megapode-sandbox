@@ -26,7 +26,7 @@ import com.gravspace.util.Layers;
 
 @Widget
 public class UserCommentsWidget extends ComponentBase implements IComponent   {
-
+	
 	List<Comment> comments;
 	List<String> commentWidgets = new ArrayList<String>();
 	
@@ -39,16 +39,16 @@ public class UserCommentsWidget extends ComponentBase implements IComponent   {
 	public void initialise(Object... args) {
 		Integer userId = (Integer)args[0];
 		IUserProfileData profile = DataAccessors.get(IUserProfileData.class, UserProfileData.class, this);
-		Promise<Object> wait = prepareSet();
-		set("comments", profile.comments(userId), wait);
+		//Promise<Object> wait = prepareSet();
+		//check if the future has already finished and if so, then trigger the promise completion
+		set("comments", profile.comments(userId));
 	}
 
 	@Override
 	public void collect() {
 		IWidget commentWidget = Widgets.get(CommentWidget.class, this);
 		for (Comment comment: comments){
-			Promise<Object> wait = prepareSet();
-			add("commentWidgets", commentWidget.build(comment), wait);
+			add("commentWidgets", commentWidget.build(comment));
 		}
 		
 	}
@@ -63,7 +63,7 @@ public class UserCommentsWidget extends ComponentBase implements IComponent   {
 		Map<String, Object> context = new HashMap<String, Object>();
 		context.put("comments", commentWidgets);
 		
-		return renderer.render("templates.widgets.comments.vm", context);
+		return renderer.render("templates.widgets.comments.html", context);
 	}
 
 	public List<Comment> getComments() {

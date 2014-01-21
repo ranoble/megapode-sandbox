@@ -41,13 +41,13 @@ public class UserProfileWidget extends ComponentBase implements IComponent   {
 	@Override
 	public void collect() {
 		IUserProfileData profile = DataAccessors.get(IUserProfileData.class, UserProfileData.class, this);
-		Promise<Object> wait = prepareSet();
-		set("user", profile.getUser(userId), wait);
+		//Promise<Object> wait = prepareSet();
+		set("user", profile.getUser(userId));
 	}
 
 	@Override
 	public void process() {
-		getLogger().info(user.toString());
+//		getLogger().info(user.toString());
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class UserProfileWidget extends ComponentBase implements IComponent   {
 		IRenderer renderer = Renderers.getDefault(this);
 		Map<String, Object> context = new HashMap<String, Object>();
 		context.put("user", user);
-		return renderer.render("templates.widgets.profile.vm", context);
+		return renderer.render("templates.widgets.profile.html", context);
 	}
 
 	public User getUser() {

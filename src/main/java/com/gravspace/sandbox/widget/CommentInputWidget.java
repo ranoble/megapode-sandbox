@@ -25,22 +25,18 @@ import com.gravspace.sandbox.data.UserProfileData;
 import com.gravspace.util.Layers;
 
 @Widget
-public class CommentWidget extends ComponentBase implements IComponent   {
+public class CommentInputWidget extends ComponentBase implements IComponent   {
 
-	Comment comment;
-	User user;
+	int commenter;
 	
-	public CommentWidget(Map<Layers, ActorRef> routers,
+	public CommentInputWidget(Map<Layers, ActorRef> routers,
 			ActorRef coordinatingActor, UntypedActorContext actorContext) {
 		super(routers, coordinatingActor, actorContext);
 	}
 
 	@Override
 	public void initialise(Object... args) {
-		comment = (Comment)args[0];
-		IUserProfileData profile = DataAccessors.get(IUserProfileData.class, UserProfileData.class, this);
-//		Promise<Object> wait = prepareSet();
-		set("user", profile.getUser(comment.getUserId()));
+		commenter = (int)args[0];
 	}
 
 	@Override
@@ -53,28 +49,10 @@ public class CommentWidget extends ComponentBase implements IComponent   {
 	public Future<String> render() throws Exception {
 		IRenderer renderer = Renderers.getDefault(this);
 		Map<String, Object> context = new HashMap<String, Object>();
-		context.put("comment", comment);
-		context.put("user", user);
 		
-		return renderer.render("templates.widgets.comment.html", context);
+		context.put("commenter", commenter);
+		
+		return renderer.render("templates.widgets.input.html", context);
 	}
-
-	public Comment getComment() {
-		return comment;
-	}
-
-	public void setComment(Comment comment) {
-		this.comment = comment;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	
 
 }
