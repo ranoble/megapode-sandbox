@@ -1,23 +1,17 @@
 package com.gravspace.sandbox.widget;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import scala.concurrent.Future;
-import scala.concurrent.Promise;
-
 import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
 
-import com.gravspace.abstractions.IComponent;
 import com.gravspace.abstractions.IRenderer;
-import com.gravspace.abstractions.IWidget;
 import com.gravspace.annotations.Widget;
-import com.gravspace.bases.ComponentBase;
+import com.gravspace.bases.WidgetBase;
 import com.gravspace.proxy.DataAccessors;
 import com.gravspace.proxy.Renderers;
-import com.gravspace.proxy.Widgets;
 import com.gravspace.sandbox.beans.Comment;
 import com.gravspace.sandbox.beans.User;
 import com.gravspace.sandbox.data.IUserProfileData;
@@ -25,7 +19,7 @@ import com.gravspace.sandbox.data.UserProfileData;
 import com.gravspace.util.Layers;
 
 @Widget
-public class CommentWidget extends ComponentBase implements IComponent   {
+public class CommentWidget extends WidgetBase   {
 
 	Comment comment;
 	User user;

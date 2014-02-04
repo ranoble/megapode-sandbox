@@ -9,6 +9,8 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.http.NameValuePair;
+import org.omg.DynamicAny.NameValuePairSeqHelper;
 
 import scala.concurrent.Future;
 
@@ -16,16 +18,17 @@ import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
 import akka.dispatch.Futures;
 
-import com.gravspace.abstractions.IPersistanceAccessor;
+import com.gravspace.abstractions.IDataAccessor;
 import com.gravspace.annotations.PersistanceAccessor;
 import com.gravspace.bases.PersistanceBase;
+import com.gravspace.messages.Null;
 import com.gravspace.sandbox.beans.Comment;
 import com.gravspace.sandbox.beans.User;
 import com.gravspace.util.Layers;
 
 @PersistanceAccessor
 public class UserProfileData extends PersistanceBase implements
-		IPersistanceAccessor, IUserProfileData {
+		IDataAccessor, IUserProfileData {
 
 	public UserProfileData(Map<Layers, ActorRef> routers,
 			ActorRef coordinatingActor, UntypedActorContext actorContext,

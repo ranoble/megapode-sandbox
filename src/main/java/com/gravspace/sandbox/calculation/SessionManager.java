@@ -25,4 +25,6 @@ public class SessionManager extends CalculationBase implements ICalculation, ISe
 	public Future<Integer> currentUser(){
 		return Futures.successful(1);
 	}
+	
+	
 }

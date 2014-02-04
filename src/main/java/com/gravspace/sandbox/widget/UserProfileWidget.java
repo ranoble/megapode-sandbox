@@ -4,15 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import scala.concurrent.Future;
-import scala.concurrent.Promise;
-
 import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
 
-import com.gravspace.abstractions.IComponent;
 import com.gravspace.abstractions.IRenderer;
 import com.gravspace.annotations.Widget;
-import com.gravspace.bases.ComponentBase;
+import com.gravspace.bases.WidgetBase;
 import com.gravspace.proxy.DataAccessors;
 import com.gravspace.proxy.Renderers;
 import com.gravspace.sandbox.beans.User;
@@ -21,7 +18,7 @@ import com.gravspace.sandbox.data.UserProfileData;
 import com.gravspace.util.Layers;
 
 @Widget
-public class UserProfileWidget extends ComponentBase implements IComponent   {
+public class UserProfileWidget extends WidgetBase   {
 	
 	User user;
 	private Integer userId;

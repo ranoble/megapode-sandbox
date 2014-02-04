@@ -6,16 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import scala.concurrent.Future;
-import scala.concurrent.Promise;
-
 import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
 
-import com.gravspace.abstractions.IComponent;
 import com.gravspace.abstractions.IRenderer;
 import com.gravspace.abstractions.IWidget;
-import com.gravspace.annotations.Widget;
-import com.gravspace.bases.ComponentBase;
+import com.gravspace.abstractions.Widget;
+import com.gravspace.bases.WidgetBase;
 import com.gravspace.proxy.DataAccessors;
 import com.gravspace.proxy.Renderers;
 import com.gravspace.proxy.Widgets;
@@ -24,8 +21,8 @@ import com.gravspace.sandbox.data.IUserProfileData;
 import com.gravspace.sandbox.data.UserProfileData;
 import com.gravspace.util.Layers;
 
-@Widget
-public class UserCommentsWidget extends ComponentBase implements IComponent   {
+@com.gravspace.annotations.Widget
+public class UserCommentsWidget extends WidgetBase   {
 	
 	List<Comment> comments;
 	List<String> commentWidgets = new ArrayList<String>();
@@ -46,7 +43,7 @@ public class UserCommentsWidget extends ComponentBase implements IComponent   {
 
 	@Override
 	public void collect() {
-		IWidget commentWidget = Widgets.get(CommentWidget.class, this);
+		Widget commentWidget = Widgets.get(CommentWidget.class, this);
 		for (Comment comment: comments){
 			add("commentWidgets", commentWidget.build(comment));
 		}

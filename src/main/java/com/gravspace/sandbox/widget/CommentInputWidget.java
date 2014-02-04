@@ -10,11 +10,10 @@ import scala.concurrent.Promise;
 import akka.actor.ActorRef;
 import akka.actor.UntypedActorContext;
 
-import com.gravspace.abstractions.IComponent;
 import com.gravspace.abstractions.IRenderer;
 import com.gravspace.abstractions.IWidget;
 import com.gravspace.annotations.Widget;
-import com.gravspace.bases.ComponentBase;
+import com.gravspace.bases.WidgetBase;
 import com.gravspace.proxy.DataAccessors;
 import com.gravspace.proxy.Renderers;
 import com.gravspace.proxy.Widgets;
@@ -25,7 +24,7 @@ import com.gravspace.sandbox.data.UserProfileData;
 import com.gravspace.util.Layers;
 
 @Widget
-public class CommentInputWidget extends ComponentBase implements IComponent   {
+public class CommentInputWidget extends WidgetBase implements IWidget   {
 
 	int commenter;
 	

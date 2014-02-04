@@ -17,12 +17,13 @@ import akka.testkit.JavaTestKit;
 import akka.util.Timeout;
 
 import com.gravspace.abstractions.IWidget;
+import com.gravspace.abstractions.Widget;
 import com.gravspace.proxy.Widgets;
 import com.gravspace.sandbox.widget.CommentInputWidget;
+import com.gravspace.testing.CallableContainer;
+import com.gravspace.testing.GetCallable;
+import com.gravspace.testing.TestCoordinator;
 
-import core.CallableContainer;
-import core.GetCallable;
-import core.TestCoordinator;
 
 public class BaseTests{
 
@@ -70,7 +71,7 @@ public class BaseTests{
 	public void testWidget() throws Exception {
 		new JavaTestKit(system) {
 			{
-				IWidget data = Widgets.get(CommentInputWidget.class, cc.getCallable());//getDefaultRender(cc.getCallable());
+				Widget data = Widgets.get(CommentInputWidget.class, cc.getCallable());//getDefaultRender(cc.getCallable());
 
 				Future<String> result = data.build(1);
 				
